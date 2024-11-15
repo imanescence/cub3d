@@ -9,7 +9,8 @@ SRCS = main.c\
 	   get_next_line.c\
 	   get_next_line_utils.c\
 	   map_parsing.c\
-	   ft_strdup.c
+	   ft_strdup.c\
+	   draw_map.c
 
 OBJ = $(SRCS:.c=.o)
 

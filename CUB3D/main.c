@@ -1,13 +1,19 @@
 #include "cub3d.h"
 
 // parser la map elle mme avec le backtracking comme chez so long
-
+// on trce le canva avec el max  x et max y que je trouve grace aux nb de \n 
+// et en comparant les strlen de toutes les lignes et trouver la plus grande
+// puis backtrack
 void data_initializer(t_data *data, char *file)
 {
 	(void)file;
+	data->map.max_x = 8;
+	data->map.max_y = 8;
+	data->map.pixel = 32;
 	data->texture_paths = (char **) malloc (5 * sizeof (char *));
 	if (!data->texture_paths)
 		exit (EXIT_FAILURE);
+	data->map.map = ft_calloc(data->map.max_x, data->map.max_y); 
 }
 
 void file_open_rights_verificator(char *file)
@@ -78,8 +84,14 @@ int main(int argc, char **argv)
 	map_parsing(&data, argv[1]);
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, WIDTH, HEIGHT, "CUB3D");
+	if ((data.data_img.img = mlx_new_image(data.mlx, WIDTH, HEIGHT)) == NULL)
+        return (printf("error fatal\n"), 1);
+ 	if ((data.data_img.addr = mlx_get_data_addr(data.data_img.img, &data.data_img.bits_per_pixel, &data.data_img.line_length, &data.data_img.endian)) == NULL)
+        return (printf("error fatal\n"), 1);
 	mlx_key_hook(data.win, key_hook, &data);
 	mlx_hook(data.win, X_PRESSED, 0, close_window, &data);
+	draw_map2d(&data);
+	mlx_put_image_to_window(data.mlx, data.win, data.data_img.img, 0, 0);
 	mlx_loop(data.mlx);
 	return (0);
 }
