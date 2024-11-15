@@ -6,7 +6,7 @@
 /*   By: iait-ouf <aitouflih.iman@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 17:09:15 by iait-ouf          #+#    #+#             */
-/*   Updated: 2024/11/15 17:34:46 by iait-ouf         ###   ########.fr       */
+/*   Updated: 2024/11/15 18:24:39 by iait-ouf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,26 @@ void	draw_player(t_data *data)
 
 void draw_map2d(t_data *data)
 {
-	int x, y;	y = 0;
+	int x;
+	int y;	
+	
+
+	int yo = 0;
+
+	while (yo < data->map.max_x * data->map.max_y)
+	{
+		if (yo % 8 == 0 && yo != 0)
+			printf("\n");
+		printf("%d", data->map.map[yo]);
+		yo++;
+	}
+	y = 0;
 	while (y < data->map.max_y)
 	{
 		x = 0;
 		while (x < data->map.max_x)
 		{
+			printf ("x %d et y %d rslt de juste en dessous %d|\n", x, y, data->map.map[(y * data->map.max_x) + x]);
 			if (data->map.map[y * data->map.max_x + x] == 1)
 				put_big_pixel(data, x * data->map.pixel, y * data->map.pixel, 0xFFFFFF);
 			else

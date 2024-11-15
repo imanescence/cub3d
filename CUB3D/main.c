@@ -81,15 +81,79 @@ int main(int argc, char **argv)
 
 	basic_parsing(argc, argv);
 	data_initializer(&data, argv[1]);
-	map_parsing(&data, argv[1]);
 	data.mlx = mlx_init();
+	map_parsing(&data, argv[1]);
+	int yo = 0;
+	printf("(1)\n");
+	while (yo < data.map.max_x * data.map.max_y)
+	{
+		if (yo % 8 == 0 && yo != 0)
+			printf("\n");
+		printf("%d", data.map.map[yo]);
+		yo++;
+	}
+	//data.mlx = mlx_init();
+	yo = 0;
+	printf("(2)\n");
+	while (yo < data.map.max_x * data.map.max_y)
+	{
+		if (yo % 8 == 0 && yo != 0)
+			printf("\n");
+		printf("%d", data.map.map[yo]);
+		yo++;
+	}
 	data.win = mlx_new_window(data.mlx, WIDTH, HEIGHT, "CUB3D");
+	yo = 0;
+	printf("(3)\n");
+	while (yo < data.map.max_x * data.map.max_y)
+	{
+		if (yo % 8 == 0 && yo != 0)
+			printf("\n");
+		printf("%d", data.map.map[yo]);
+		yo++;
+	}
 	if ((data.data_img.img = mlx_new_image(data.mlx, WIDTH, HEIGHT)) == NULL)
         return (printf("error fatal\n"), 1);
+	yo = 0;
+	printf("(4)\n");
+	while (yo < data.map.max_x * data.map.max_y)
+	{
+		if (yo % 8 == 0 && yo != 0)
+			printf("\n");
+		printf("%d", data.map.map[yo]);
+		yo++;
+	}
  	if ((data.data_img.addr = mlx_get_data_addr(data.data_img.img, &data.data_img.bits_per_pixel, &data.data_img.line_length, &data.data_img.endian)) == NULL)
         return (printf("error fatal\n"), 1);
+	yo = 0;
+	printf("(5)\n");
+	while (yo < data.map.max_x * data.map.max_y)
+	{
+		if (yo % 8 == 0 && yo != 0)
+			printf("\n");
+		printf("%d", data.map.map[yo]);
+		yo++;
+	}
 	mlx_key_hook(data.win, key_hook, &data);
+	yo = 0;
+	printf("(6)\n");
+	while (yo < data.map.max_x * data.map.max_y)
+	{
+		if (yo % 8 == 0 && yo != 0)
+			printf("\n");
+		printf("%d", data.map.map[yo]);
+		yo++;
+	}
 	mlx_hook(data.win, X_PRESSED, 0, close_window, &data);
+	yo = 0;
+	printf("()\n");
+	while (yo < data.map.max_x * data.map.max_y)
+	{
+		if (yo % 8 == 0 && yo != 0)
+			printf("\n");
+		printf("%d", data.map.map[yo]);
+		yo++;
+	}
 	draw_map2d(&data);
 	mlx_put_image_to_window(data.mlx, data.win, data.data_img.img, 0, 0);
 	mlx_loop(data.mlx);

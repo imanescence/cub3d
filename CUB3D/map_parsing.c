@@ -6,7 +6,7 @@
 /*   By: iait-ouf <aitouflih.iman@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 12:00:06 by iait-ouf          #+#    #+#             */
-/*   Updated: 2024/11/15 17:04:10 by iait-ouf         ###   ########.fr       */
+/*   Updated: 2024/11/15 18:24:29 by iait-ouf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	get_map(char *file, t_data *data)
 	int i;
 	int line;
 	char *col;
+	char s[2];
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
@@ -61,9 +62,11 @@ void	get_map(char *file, t_data *data)
 	while (col != NULL)
 	{
 		i = 0;
-		while (col[i])
+		while (i < data->map.max_x)
 		{
-			data->map.map[line * data->map.max_y + i] = col[i] - 48;
+			s[0] = col[i];
+			s[1] = '\0';
+			data->map.map[line * data->map.max_y + i] = atoi(s);
 			i++;
 		}
 		col = get_next_line(fd);
